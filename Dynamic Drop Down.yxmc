@@ -1,0 +1,571 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2019.1">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="102" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="True" />
+          <Name>Input2</Name>
+          <Abbrev />
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <FileInput>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="8">..\Data\Sample - EU Superstore.xls|||`Orders$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <NoProgress>False</NoProgress>
+              </FormatSpecificOptions>
+            </Configuration>
+          </FileInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Sample - EU Superstore.xls
+Table=`Orders$`</DefaultAnnotationText>
+          <Left value="True" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Row ID" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Order ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Order Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Mode" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Segment" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="City" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="State" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Country" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Region" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sub-Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sales" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Quantity" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Discount" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Profit" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="690" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>[Year] = "2018"</Expression>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Operator>=</Operator>
+            <Field>Year</Field>
+            <Operands>
+              <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+              <DateType>fixed</DateType>
+              <PeriodDate>2019-03-13 21:30:06</PeriodDate>
+              <PeriodType>
+              </PeriodType>
+              <PeriodCount>0</PeriodCount>
+              <StartDate>2019-03-13 21:30:06</StartDate>
+              <EndDate>2019-03-13 21:30:06</EndDate>
+              <Operand>2018</Operand>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[Year] = "2018"</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="True">
+          <RecordInfo>
+            <Field name="Row ID" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Order ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Order Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Mode" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Segment" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="City" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="State" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Country" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Region" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sub-Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sales" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Quantity" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Discount" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Profit" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Year" size="1073741823" source="Formula: DateTimeYear([Order Date])" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+        <MetaInfo connection="False">
+          <RecordInfo>
+            <Field name="Row ID" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Order ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Order Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Mode" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Segment" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="City" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="State" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Country" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Region" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sub-Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sales" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Quantity" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Discount" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Profit" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Year" size="1073741823" source="Formula: DateTimeYear([Order Date])" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="222" y="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="DateTimeYear([Order Date])" field="Year" size="1073741823" type="V_WString" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[Year = DateTimeYear([Order Date])
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Row ID" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Order ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Order Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Date" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="DateTime" />
+            <Field name="Ship Mode" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Customer Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Segment" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="City" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="State" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Country" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Region" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product ID" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sub-Category" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Product Name" size="255" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="V_WString" />
+            <Field name="Sales" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Quantity" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Discount" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Profit" source="File: C:\Users\898450\Documents\Projects\BRS digital\Alteryx Advanced\Standard Macro\Data\Sample - EU Superstore.xls|||`Orders$`" type="Double" />
+            <Field name="Year" size="1073741823" source="Formula: DateTimeYear([Order Date])" type="V_WString" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="882" y="294" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output6</Name>
+          <Abbrev />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="690" y="210" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="786" y="294" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="State" action="GroupBy" rename="State" />
+            <SummarizeField field="Sales" action="Sum" rename="Sum_Sales" />
+            <SummarizeField field="Quantity" action="Sum" rename="Sum_Quantity" />
+            <SummarizeField field="Discount" action="Avg" rename="Avg_Discount" />
+            <SummarizeField field="Profit" action="Sum" rename="Sum_Profit" />
+            <SummarizeField field="Year" action="GroupBy" rename="Year" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="State" size="255" source="Summarize: GroupBy - State" type="V_WString" />
+            <Field name="Sum_Sales" source="Summarize: Sum - Sales" type="Double" />
+            <Field name="Sum_Quantity" source="Summarize: Sum - Quantity" type="Double" />
+            <Field name="Avg_Discount" source="Summarize: Avg - Discount" type="Double" />
+            <Field name="Sum_Profit" source="Summarize: Sum - Profit" type="Double" />
+            <Field name="Year" size="1073741823" source="Summarize: GroupBy - Year" type="V_WString" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="State" order="Asc" />
+            <Field field="Year" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="305" y="27.99998" width="530" height="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>These steps to create and then read in the yxdb to create a dynamic filter</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="8">
+          <GuiSettings Plugin="AlteryxGuiToolkit.Questions.DropDownListBox.DropDown">
+            <Position x="678" y="78" width="59" height="59" />
+          </GuiSettings>
+          <Properties>
+            <Configuration />
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+          </Properties>
+        </Node>
+        <Node ToolID="11">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="330" y="78.00001" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="Year" action="GroupBy" rename="Year" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Year" size="1073741823" source="Summarize: GroupBy - Year" type="V_WString" />
+              </RecordInfo>
+              <SortInfo>
+                <Field field="Year" order="Asc" />
+              </SortInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="12">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="414" y="77.99998" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="[Year]" field="Year2" size="1073741823" type="V_WString" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText><![CDATA[Year2 = [Year]
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Year" size="1073741823" source="Summarize: GroupBy - Year" type="V_WString" />
+                <Field name="Year2" size="1073741823" source="Formula: [Year]" type="V_WString" />
+              </RecordInfo>
+              <SortInfo>
+                <Field field="Year" order="Asc" />
+              </SortInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="14">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="582" y="78" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File FileFormat="19" MaxRecords="">.\YearInput.yxdb</File>
+              <Passwords />
+              <FormatSpecificOptions>
+                <NoSpatialIndex>False</NoSpatialIndex>
+                <SaveSource>True</SaveSource>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>YearInput.yxdb</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="15">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="498" y="78" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Year" selected="True" rename="Name" />
+                <SelectField field="Year2" selected="True" rename="Value" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Name" size="1073741823" source="Summarize: GroupBy - Year" type="V_WString" />
+                <Field name="Value" size="1073741823" source="Formula: [Year]" type="V_WString" />
+              </RecordInfo>
+              <SortInfo>
+                <Field field="Name" order="Asc" />
+              </SortInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="True" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="9" Connection="Action" />
+      <Destination ToolID="3" Connection="Action" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="8" Connection="Question" />
+      <Destination ToolID="9" Connection="Question" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <Constants>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Drop Down (8)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+    </Constants>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Dynamic Drop Down</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+    <RuntimeProperties>
+      <Actions>
+        <NoCondition>
+          <Type>NoCondition</Type>
+          <Description>(Always Run)</Description>
+          <True>
+            <Action>
+              <Type>UpdateValue</Type>
+              <Description />
+              <ToolId value="9" />
+              <Mode>Simple</Mode>
+              <Variable />
+              <Replace value="True" />
+              <ReplaceText>2018</ReplaceText>
+              <Destination>3/Simple/Operands/Operand</Destination>
+            </Action>
+          </True>
+        </NoCondition>
+      </Actions>
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (1)</Name>
+          <ToolId value="1" />
+          <Questions>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description>Macro Input (2)</Description>
+              <Name>Macro Input (2)</Name>
+              <ToolId value="2" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (6)</Description>
+              <Name>Macro Output (6)</Name>
+              <ToolId value="6" />
+            </Question>
+            <Question>
+              <Type>ListBox</Type>
+              <Description>Select a year</Description>
+              <Name>Drop Down (8)</Name>
+              <ToolId value="8" />
+              <Multiple value="False" />
+              <Default />
+              <Mode>DW2</Mode>
+              <DW2_Path>.\YearInput.yxdb</DW2_Path>
+              <DW2_Password />
+              <DW2_CachedCosmeticName />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="2" Selected="True" />
+        <Tool ToolId="6" Selected="True" />
+        <Tool ToolId="14" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
