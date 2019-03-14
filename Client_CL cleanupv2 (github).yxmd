@@ -1,0 +1,933 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2019.1">
+  <Nodes>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="186" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="REGEX_CountMatches([Field_1], &quot;\t&quot;)" field="Num_Delim" size="2" type="Int16" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Find the number of delimiters in each row</AnnotationText>
+          <DefaultAnnotationText><![CDATA[Num_Delim = REGEX_CountMatches([Field_1], "\t")
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="231" source="TextInput:" type="V_String" />
+            <Field name="FileName" size="11" source="TextInput:" type="String" />
+            <Field name="Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="438" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>Field_1</UpdateField_Name>
+          <CreateField_Name>Counter</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression>IF ([Num_Delim] = [Max_Num_Delim])
+OR ([Row-1:Counter] + [Num_Delim] = [Max_Num_Delim])
+THEN 0
+ELSE ([Num_Delim] + [Row-1:Counter])
+ENDIF</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Recreate a flag if the running total is &lt;&gt; num_delim</AnnotationText>
+          <DefaultAnnotationText>IF ([Num_Delim] = [Max_Num_Delim])
+OR ([Row-1:Counter] + [Num...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="231" source="TextInput:" type="V_String" />
+            <Field name="FileName" size="11" source="TextInput:" type="String" />
+            <Field name="Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+            <Field name="Max_Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+            <Field description="Formula: IF ([Num_Delim] = [Max_Num_Delim])&#xA;OR ([Row-1:Counter] + [Num_Delim] = [Max_Num_Delim])&#xA;THEN 0&#xA;ELSE ([Num_Delim] + [Row-1:Counter])&#xA;ENDIF" name="Counter" source="Formula: IF ([Num_Delim] = [Max_Num_Delim])&#xA;OR ([Row-1:Counter] + [Num_Delim] = [Max_Num_Delim])&#xA;THEN 0&#xA;ELSE ([Num_Delim] + [Row-1:Counter])&#xA;ENDIF" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="630" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="True" />
+          <UpdateField_Name>Record_ID</UpdateField_Name>
+          <CreateField_Name>New Field</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression><![CDATA[IF [Counter] != 0 AND [Row-1:Counter] = 0
+	THEN [Row-1:Record_ID] + 1
+ELSEIF (Counter != 0) OR
+([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])
+	THEN [Row-1:Record_ID]
+ELSE [Row-1:Record_ID] + 1
+ENDIF
+]]></Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Identify the underlying records</AnnotationText>
+          <DefaultAnnotationText>IF [Counter] != 0 AND [Row-1:Counter] = 0
+	THEN [Row-1:Record...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="231" source="TextInput:" type="V_String" />
+            <Field name="FileName" size="11" source="TextInput:" type="String" />
+            <Field name="Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+            <Field name="Max_Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+            <Field description="Formula: IF ([Num_Delim] = [Max_Num_Delim])&#xA;OR ([Row-1:Counter] + [Num_Delim] = [Max_Num_Delim])&#xA;THEN 0&#xA;ELSE ([Num_Delim] + [Row-1:Counter])&#xA;ENDIF" name="Counter" source="Formula: IF ([Num_Delim] = [Max_Num_Delim])&#xA;OR ([Row-1:Counter] + [Num_Delim] = [Max_Num_Delim])&#xA;THEN 0&#xA;ELSE ([Num_Delim] + [Row-1:Counter])&#xA;ENDIF" type="Int32" />
+            <Field description="Formula: IF [Counter] != 0 AND [Row-1:Counter] = 0&#xA;	THEN [Row-1:Record_ID] + 1&#xA;ELSEIF (Counter != 0) OR&#xA;([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])&#xA;	THEN [Row-1:Record_ID]&#xA;ELSE [Row-1:Record_ID] + 1&#xA;ENDIF&#xA;" name="Record_ID" source="Formula: IF [Counter] != 0 AND [Row-1:Counter] = 0&#xA;	THEN [Row-1:Record_ID] + 1&#xA;ELSEIF (Counter != 0) OR&#xA;([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])&#xA;	THEN [Row-1:Record_ID]&#xA;ELSE [Row-1:Record_ID] + 1&#xA;ENDIF&#xA;" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="546" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="0" field="Record_ID" size="4" type="Int32" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[Record_ID = 0
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="231" source="TextInput:" type="V_String" />
+            <Field name="FileName" size="11" source="TextInput:" type="String" />
+            <Field name="Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+            <Field name="Max_Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+            <Field description="Formula: IF ([Num_Delim] = [Max_Num_Delim])&#xA;OR ([Row-1:Counter] + [Num_Delim] = [Max_Num_Delim])&#xA;THEN 0&#xA;ELSE ([Num_Delim] + [Row-1:Counter])&#xA;ENDIF" name="Counter" source="Formula: IF ([Num_Delim] = [Max_Num_Delim])&#xA;OR ([Row-1:Counter] + [Num_Delim] = [Max_Num_Delim])&#xA;THEN 0&#xA;ELSE ([Num_Delim] + [Row-1:Counter])&#xA;ENDIF" type="Int32" />
+            <Field name="Record_ID" source="Formula: 0" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="25">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="714" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="Record_ID" action="GroupBy" rename="Record_ID" />
+            <SummarizeField field="Field_1" action="Concat" rename="Concat_Field_1">
+              <Concat_Start />
+              <Separator />
+              <Concat_End />
+            </SummarizeField>
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Group the records together</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field description="Formula: IF [Counter] != 0 AND [Row-1:Counter] = 0&#xA;	THEN [Row-1:Record_ID] + 1&#xA;ELSEIF (Counter != 0) OR&#xA;([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])&#xA;	THEN [Row-1:Record_ID]&#xA;ELSE [Row-1:Record_ID] + 1&#xA;ENDIF&#xA;" name="Record_ID" source="Summarize: GroupBy - Record_ID" type="Int32" />
+            <Field name="Concat_Field_1" size="2147483647" source="Summarize: Concat - Field_1" type="V_String" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="Record_ID" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="34">
+      <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+        <Position x="54" y="90" width="336" height="36" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Text>Updating a GL file when there are erroneous carriage returns which cause records to be split over multiple rows</Text>
+          <Font name="Arial" size="8.25" style="0" />
+          <TextColor name="Black" />
+          <FillColor name="White" />
+          <Shape shape="0" />
+          <Justification Justification="4" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="36">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="282" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="Num_Delim" action="Max" rename="Max_Num_Delim" />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Find max num_delim</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Max_Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="37">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="342" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="231" source="TextInput:" type="V_String" />
+            <Field name="FileName" size="11" source="TextInput:" type="String" />
+            <Field name="Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+            <Field name="Max_Num_Delim" source="Formula: REGEX_CountMatches([Field_1], &quot;\t&quot;)" type="Int16" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="38">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="49">
+      <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+        <Position x="822" y="54" width="600" height="48" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Text>By splitting the tab delimiter to rows first it makes the workflow dynamic to identify the total number of fields. Then using a multirow formula it's possible to identify the total number of fields to cross-tab the data back. Making the workflow dynamic for all scenarios.</Text>
+          <Font name="Arial" size="8.25" style="0" />
+          <TextColor name="Black" />
+          <FillColor name="White" />
+          <Shape shape="0" />
+          <Justification Justification="4" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="51">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="66" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="37" />
+          <Fields>
+            <Field name="Field_1" />
+            <Field name="FileName" />
+          </Fields>
+          <Data>
+            <r>
+              <c>Business_Unit	Account_Number	Journal_ID	Jounral_ID_Line_No	Journal_Header_Desc	GL_Journal_Line_Desc	Rep_Currency	Rep_Amount	Username	Approver_name	Create_Date	Create_Time	Effect_Date	Entry_Year	Fiscal_Year	Period	Doc_Type	Reversals</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16101	8554124	1	Journal Import 29027752:	Journal Import Created	GBP	-0.5800	1133		04-Jan-13	03:59:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	41001	8554124	2	Journal Import 29027752:	Journal Import Created	GBP	-0.0100	1133		04-Jan-13	03:59:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	81001	8554124	3	Journal Import 29027752:	Journal Import Created	GBP	0.5900	1133		04-Jan-13	03:59:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16101	8554800	1	Journal Import 29037943:	Journal Import Created	GBP	6143.2300	1156		08-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Credit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	26101	8554800	2	Journal Import 29037943:	Journal Import Created	GBP	-6143.2400	1156		08-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Credit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	91406	8554800	3	Journal Import 29037943:	Journal Import Created	GBP	0.0100	1156		08-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Credit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16101	8555052	1	Journal Import 29041070:	Journal Import Created	GBP	-81.9200	1156		09-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	41001	8555052	2	Journal Import 29041070:	Journal Import Created	GBP	77.2800	1156		09-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	26801	8555052	3	Journal Import 29041070:	Journal Import Created	GBP	4.6400	1156		09-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	26101	8555171	1	Journal Import 29042518:	Journal Import Created	GBP	15146.1600	1156		10-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16101	8555171	2	Journal Import 29042518:	Journal Import Created	GBP	-15146.1400	1156		10-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	91406	8555171	3	Journal Import 29042518:	Journal Import Created	GBP	-0.0200	1156		10-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Miscellaneous	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	41001	8555551	1	Journal Import 29047108:	Journal Import Created	GBP	-32.1600	1156		11-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16204	8555551	2	Journal Import 29047108:	Journal Import Created	GBP	30.3400	1156		11-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16101	8555551	3	Journal Import 29047108:	Journal Import Created	GBP	1.8200	1156		11-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Debit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16204	8555663	1	Journal Import 29048555:	Journal Import Created	GBP	-7242.1000	1156		12-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	41001	8555663	2	Journal Import 29048555:	Journal Import Created	GBP	-69184.8800	1156		12-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16101	8555663	3	Journal Import 29048555:	Journal Import Created	GBP	76426.9800	1156		12-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16204	8555926	1	Journal Import 29055960:	Journal Import Created	GBP	23368.9600	1156		15-Jan-13	01:04:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16204	8555926	2	Journal Import 29055960:	Journal Import</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>Created	GBP	-36082.0900	1156		15-Jan-13	01:04:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	17485	8555926	3	Journal Import 29055960:	Journal Import</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>Created	GBP	12713.1300	1156		15-Jan-13	01:04:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16101	8556121	1	Journal Import 29059019:	Journal Import</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>Created	GBP	2884.0300	1156		16-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Credit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	26101	8556121	2	Journal Import 29059019:	Journal Import</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>Created	GBP	-3600.0600	1156		16-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Credit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	81001	8556121	3	Journal Import 29059019:	Journal Import</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>Created	GBP	716.0300	1156		16-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Credit Memos	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16204	8556123	1	Journal Import 29059018:	Journal Import</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>Created	GBP	160990.4300	1156		16-Jan-13	01:03:00 AM	Jan-31-2013	20</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>13	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16204	8556123	2	Journal Import 29059018:	Journal Import Created	GBP	-190553.3500	1156		16-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	17485	8556123	3	Journal Import 29059018:	Journal Import Created	GBP	29562.9200	1156		16-Jan-13	01:03:00 AM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	16204	8556254	1	Journal Import 29060715:	Journal Import Created	GBP	-15042.3800	1156		16-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+            <r>
+              <c>212	41001	8556254	2	Journal Import 29060715:	Journal Import Created	GBP	-124087.2800	1156		16-Jan-13	01:03:00 PM	Jan-31-2013	2013	2013	02	Receipts	0</c>
+              <c>Client_GL_b</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="231" source="TextInput:" type="V_String" />
+            <Field name="FileName" size="11" source="TextInput:" type="String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="52">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="1554" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\898450\AppData\Local\Temp\Engine_30100_3e1fe00aab694c219ecf9e73577c947c_\Engine_24048_10e2bf3aadf5477b9cc47476795ed604_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="33">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="797" y="112" width="685" height="166" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Parse data out and rename headers</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="6">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="822" y="162" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>Concat_Field_1</Field>
+              <Delimeters value="\t" />
+              <NumFields value="1" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field description="Formula: IF [Counter] != 0 AND [Row-1:Counter] = 0&#xA;	THEN [Row-1:Record_ID] + 1&#xA;ELSEIF (Counter != 0) OR&#xA;([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])&#xA;	THEN [Row-1:Record_ID]&#xA;ELSE [Row-1:Record_ID] + 1&#xA;ENDIF&#xA;" name="Record_ID" source="Summarize: GroupBy - Record_ID" type="Int32" />
+                <Field description="TextToColumns: Parsed from Concat_Field_1" name="Concat_Field_1" size="2147483647" source="TextToColumns: Parsed from Concat_Field_1" type="V_String" />
+              </RecordInfo>
+              <SortInfo>
+                <Field field="Record_ID" order="Asc" />
+              </SortInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+        <Node ToolID="22">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1194" y="162" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Record_ID" selected="False" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="1" size="2048" source="CrossTab:Header:Column:1:Concat:" type="V_String" />
+                <Field name="2" size="2048" source="CrossTab:Header:Column:2:Concat:" type="V_String" />
+                <Field name="3" size="2048" source="CrossTab:Header:Column:3:Concat:" type="V_String" />
+                <Field name="4" size="2048" source="CrossTab:Header:Column:4:Concat:" type="V_String" />
+                <Field name="5" size="2048" source="CrossTab:Header:Column:5:Concat:" type="V_String" />
+                <Field name="6" size="2048" source="CrossTab:Header:Column:6:Concat:" type="V_String" />
+                <Field name="7" size="2048" source="CrossTab:Header:Column:7:Concat:" type="V_String" />
+                <Field name="8" size="2048" source="CrossTab:Header:Column:8:Concat:" type="V_String" />
+                <Field name="9" size="2048" source="CrossTab:Header:Column:9:Concat:" type="V_String" />
+                <Field name="10" size="2048" source="CrossTab:Header:Column:10:Concat:" type="V_String" />
+                <Field name="11" size="2048" source="CrossTab:Header:Column:11:Concat:" type="V_String" />
+                <Field name="12" size="2048" source="CrossTab:Header:Column:12:Concat:" type="V_String" />
+                <Field name="13" size="2048" source="CrossTab:Header:Column:13:Concat:" type="V_String" />
+                <Field name="14" size="2048" source="CrossTab:Header:Column:14:Concat:" type="V_String" />
+                <Field name="15" size="2048" source="CrossTab:Header:Column:15:Concat:" type="V_String" />
+                <Field name="16" size="2048" source="CrossTab:Header:Column:16:Concat:" type="V_String" />
+                <Field name="17" size="2048" source="CrossTab:Header:Column:17:Concat:" type="V_String" />
+                <Field name="18" size="2048" source="CrossTab:Header:Column:18:Concat:" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="26">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DynamicRename.DynamicRename">
+            <Position x="1302" y="162" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <RenameMode>FirstRow</RenameMode>
+              <Fields orderChanged="False">
+                <Field name="*Unknown" />
+              </Fields>
+              <Expression />
+              <FirstRow>
+                <OnError>Warn</OnError>
+              </FirstRow>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Business_Unit" size="2048" source="CrossTab:Header:Column:1:Concat:" type="V_String" />
+                <Field name="Account_Number" size="2048" source="CrossTab:Header:Column:2:Concat:" type="V_String" />
+                <Field name="Journal_ID" size="2048" source="CrossTab:Header:Column:3:Concat:" type="V_String" />
+                <Field name="Jounral_ID_Line_No" size="2048" source="CrossTab:Header:Column:4:Concat:" type="V_String" />
+                <Field name="Journal_Header_Desc" size="2048" source="CrossTab:Header:Column:5:Concat:" type="V_String" />
+                <Field name="GL_Journal_Line_Desc" size="2048" source="CrossTab:Header:Column:6:Concat:" type="V_String" />
+                <Field name="Rep_Currency" size="2048" source="CrossTab:Header:Column:7:Concat:" type="V_String" />
+                <Field name="Rep_Amount" size="2048" source="CrossTab:Header:Column:8:Concat:" type="V_String" />
+                <Field name="Username" size="2048" source="CrossTab:Header:Column:9:Concat:" type="V_String" />
+                <Field name="Approver_name" size="2048" source="CrossTab:Header:Column:10:Concat:" type="V_String" />
+                <Field name="Create_Date" size="2048" source="CrossTab:Header:Column:11:Concat:" type="V_String" />
+                <Field name="Create_Time" size="2048" source="CrossTab:Header:Column:12:Concat:" type="V_String" />
+                <Field name="Effect_Date" size="2048" source="CrossTab:Header:Column:13:Concat:" type="V_String" />
+                <Field name="Entry_Year" size="2048" source="CrossTab:Header:Column:14:Concat:" type="V_String" />
+                <Field name="Fiscal_Year" size="2048" source="CrossTab:Header:Column:15:Concat:" type="V_String" />
+                <Field name="Period" size="2048" source="CrossTab:Header:Column:16:Concat:" type="V_String" />
+                <Field name="Doc_Type" size="2048" source="CrossTab:Header:Column:17:Concat:" type="V_String" />
+                <Field name="Reversals" size="2048" source="CrossTab:Header:Column:18:Concat:" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDynamicRename" />
+        </Node>
+        <Node ToolID="46">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+            <Position x="1014" y="162" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <UpdateField value="True" />
+              <UpdateField_Name>Column</UpdateField_Name>
+              <CreateField_Name>Column</CreateField_Name>
+              <CreateField_Type>Int32</CreateField_Type>
+              <CreateField_Size>4</CreateField_Size>
+              <OtherRows>Empty</OtherRows>
+              <NumRows value="1" />
+              <Expression><![CDATA[[Row-1:Column] + 1
+]]></Expression>
+              <GroupByFields>
+                <Field field="Record_ID" />
+              </GroupByFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText><![CDATA[[Row-1:Column] + 1
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field description="Formula: IF [Counter] != 0 AND [Row-1:Counter] = 0&#xA;	THEN [Row-1:Record_ID] + 1&#xA;ELSEIF (Counter != 0) OR&#xA;([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])&#xA;	THEN [Row-1:Record_ID]&#xA;ELSE [Row-1:Record_ID] + 1&#xA;ENDIF&#xA;" name="Record_ID" source="Summarize: GroupBy - Record_ID" type="Int32" />
+                <Field description="TextToColumns: Parsed from Concat_Field_1" name="Concat_Field_1" size="2147483647" source="TextToColumns: Parsed from Concat_Field_1" type="V_String" />
+                <Field description="Formula: [Row-1:Column] + 1&#xA;" name="Column" source="Formula: [Row-1:Column] + 1&#xA;" type="Int32" />
+              </RecordInfo>
+              <SortInfo>
+                <Field field="Record_ID" order="Asc" />
+              </SortInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+        </Node>
+        <Node ToolID="47">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="918" y="162" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="1" field="Column" size="4" type="Int32" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText><![CDATA[Column = 1
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field description="Formula: IF [Counter] != 0 AND [Row-1:Counter] = 0&#xA;	THEN [Row-1:Record_ID] + 1&#xA;ELSEIF (Counter != 0) OR&#xA;([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])&#xA;	THEN [Row-1:Record_ID]&#xA;ELSE [Row-1:Record_ID] + 1&#xA;ENDIF&#xA;" name="Record_ID" source="Summarize: GroupBy - Record_ID" type="Int32" />
+                <Field description="TextToColumns: Parsed from Concat_Field_1" name="Concat_Field_1" size="2147483647" source="TextToColumns: Parsed from Concat_Field_1" type="V_String" />
+                <Field name="Column" source="Formula: 1" type="Int32" />
+              </RecordInfo>
+              <SortInfo>
+                <Field field="Record_ID" order="Asc" />
+              </SortInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="48">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.CrossTab.CrossTab">
+            <Position x="1110" y="162" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <GroupFields>
+                <Field field="Record_ID" />
+              </GroupFields>
+              <HeaderField field="Column" />
+              <DataField field="Concat_Field_1" />
+              <Methods>
+                <Method method="Concat" />
+                <Separator>,</Separator>
+                <FieldSize value="2048" />
+              </Methods>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field description="Formula: IF [Counter] != 0 AND [Row-1:Counter] = 0&#xA;	THEN [Row-1:Record_ID] + 1&#xA;ELSEIF (Counter != 0) OR&#xA;([Counter] = 0 AND [Num_Delim] != [Max_Num_Delim])&#xA;	THEN [Row-1:Record_ID]&#xA;ELSE [Row-1:Record_ID] + 1&#xA;ENDIF&#xA;" name="Record_ID" source="CrossTab:Group:Concat:" type="Int32" />
+                <Field name="1" size="2048" source="CrossTab:Header:Column:1:Concat:" type="V_String" />
+                <Field name="2" size="2048" source="CrossTab:Header:Column:2:Concat:" type="V_String" />
+                <Field name="3" size="2048" source="CrossTab:Header:Column:3:Concat:" type="V_String" />
+                <Field name="4" size="2048" source="CrossTab:Header:Column:4:Concat:" type="V_String" />
+                <Field name="5" size="2048" source="CrossTab:Header:Column:5:Concat:" type="V_String" />
+                <Field name="6" size="2048" source="CrossTab:Header:Column:6:Concat:" type="V_String" />
+                <Field name="7" size="2048" source="CrossTab:Header:Column:7:Concat:" type="V_String" />
+                <Field name="8" size="2048" source="CrossTab:Header:Column:8:Concat:" type="V_String" />
+                <Field name="9" size="2048" source="CrossTab:Header:Column:9:Concat:" type="V_String" />
+                <Field name="10" size="2048" source="CrossTab:Header:Column:10:Concat:" type="V_String" />
+                <Field name="11" size="2048" source="CrossTab:Header:Column:11:Concat:" type="V_String" />
+                <Field name="12" size="2048" source="CrossTab:Header:Column:12:Concat:" type="V_String" />
+                <Field name="13" size="2048" source="CrossTab:Header:Column:13:Concat:" type="V_String" />
+                <Field name="14" size="2048" source="CrossTab:Header:Column:14:Concat:" type="V_String" />
+                <Field name="15" size="2048" source="CrossTab:Header:Column:15:Concat:" type="V_String" />
+                <Field name="16" size="2048" source="CrossTab:Header:Column:16:Concat:" type="V_String" />
+                <Field name="17" size="2048" source="CrossTab:Header:Column:17:Concat:" type="V_String" />
+                <Field name="18" size="2048" source="CrossTab:Header:Column:18:Concat:" type="V_String" />
+              </RecordInfo>
+              <SortInfo>
+                <Field field="Record_ID" order="Asc" />
+              </SortInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxCrossTab" />
+        </Node>
+        <Node ToolID="50">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AutoField.AutoField">
+            <Position x="1398" y="162" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Fields>
+                <Field field="Business_Unit" selected="True" />
+                <Field field="Account_Number" selected="True" />
+                <Field field="Journal_ID" selected="True" />
+                <Field field="Jounral_ID_Line_No" selected="True" />
+                <Field field="Journal_Header_Desc" selected="True" />
+                <Field field="GL_Journal_Line_Desc" selected="True" />
+                <Field field="Rep_Currency" selected="True" />
+                <Field field="Rep_Amount" selected="True" />
+                <Field field="Username" selected="True" />
+                <Field field="Approver_name" selected="True" />
+                <Field field="Create_Date" selected="True" />
+                <Field field="Create_Time" selected="True" />
+                <Field field="Effect_Date" selected="True" />
+                <Field field="Entry_Year" selected="True" />
+                <Field field="Fiscal_Year" selected="True" />
+                <Field field="Period" selected="True" />
+                <Field field="Doc_Type" selected="True" />
+                <Field field="Reversals" selected="True" />
+                <Field field="*Unknown" selected="True" />
+              </Fields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Business_Unit" source="CrossTab:Header:Column:1:Concat:" type="Byte" />
+                <Field name="Account_Number" source="CrossTab:Header:Column:2:Concat:" type="Int32" />
+                <Field name="Journal_ID" source="CrossTab:Header:Column:3:Concat:" type="Int32" />
+                <Field name="Jounral_ID_Line_No" source="CrossTab:Header:Column:4:Concat:" type="Byte" />
+                <Field name="Journal_Header_Desc" size="24" source="CrossTab:Header:Column:5:Concat:" type="String" />
+                <Field name="GL_Journal_Line_Desc" size="22" source="CrossTab:Header:Column:6:Concat:" type="String" />
+                <Field name="Rep_Currency" size="3" source="CrossTab:Header:Column:7:Concat:" type="String" />
+                <Field name="Rep_Amount" source="CrossTab:Header:Column:8:Concat:" type="Double" />
+                <Field name="Username" source="CrossTab:Header:Column:9:Concat:" type="Int16" />
+                <Field name="Approver_name" size="1" source="CrossTab:Header:Column:10:Concat:" type="String" />
+                <Field name="Create_Date" size="9" source="CrossTab:Header:Column:11:Concat:" type="String" />
+                <Field name="Create_Time" size="11" source="CrossTab:Header:Column:12:Concat:" type="String" />
+                <Field name="Effect_Date" size="11" source="CrossTab:Header:Column:13:Concat:" type="String" />
+                <Field name="Entry_Year" source="CrossTab:Header:Column:14:Concat:" type="Int16" />
+                <Field name="Fiscal_Year" source="CrossTab:Header:Column:15:Concat:" type="Int16" />
+                <Field name="Period" size="2" source="CrossTab:Header:Column:16:Concat:" type="String" />
+                <Field name="Doc_Type" size="13" source="CrossTab:Header:Column:17:Concat:" type="String" />
+                <Field name="Reversals" source="CrossTab:Header:Column:18:Concat:" type="Byte" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAutoField" />
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="36" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="37" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="36" Connection="Output" />
+      <Destination ToolID="37" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="25" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="25" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="37" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="51" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="47" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="22" Connection="Output" />
+      <Destination ToolID="26" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="26" Connection="Output" />
+      <Destination ToolID="50" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="46" Connection="Output" />
+      <Destination ToolID="48" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="47" Connection="Output" />
+      <Destination ToolID="46" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="48" Connection="Output" />
+      <Destination ToolID="22" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="50" Connection="Output" />
+      <Destination ToolID="52" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Client_CL cleanupv2 (github)</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+    <RuntimeProperties>
+      <Actions />
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (38)</Name>
+          <ToolId value="38" />
+          <Questions />
+        </Question>
+      </Questions>
+      <ModuleType>Wizard</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="0" />
+      <MacroInputs />
+      <MacroOutputs />
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="52" Selected="False" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
